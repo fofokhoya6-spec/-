@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>بوت المكتبة - المكتبة الرئيسية</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="panel">
+      <h1 id="title">بوت المكتبة الرئيسية</h1>
+      <div id="language-select" class="lang-select">
+        <p>اختر اللغة • Choisissez la langue • Choose language</p>
+        <div class="buttons">
+          <button onclick="setLanguage('ar')">العربية</button>
+          <button onclick="setLanguage('fr')">Français</button>
+          <button onclick="setLanguage('en')">English</button>
+        </div>
+      </div>
+
+      <div id="chat" class="chat" style="display:none;"></div>
+
+      <div id="input-area" class="input-area" style="display:none;">
+        <input id="user-input" placeholder="" />
+        <button id="send-btn" onclick="sendMessage()">إرسال</button>
+      </div>
+    </div>
+    <footer class="footer">المكتبة الرئيسية للمطالعة العمومية</footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

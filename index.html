@@ -1,35 +1,55 @@
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>بوت المكتبة - المكتبة الرئيسية</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوت المكتبة</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; direction: rtl; text-align: right; }
+        #chat { width: 90%; max-width: 600px; margin: auto; background: white; padding: 10px; border-radius: 10px; }
+        .message { padding: 5px; margin: 5px; border-radius: 5px; }
+        .user { background: #d1ffd1; }
+        .bot { background: #d1e0ff; }
+        input { width: 80%; padding: 10px; }
+        button { padding: 10px; }
+    </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="panel">
-      <h1 id="title">بوت المكتبة الرئيسية</h1>
-      <div id="language-select" class="lang-select">
-        <p>اختر اللغة • Choisissez la langue • Choose language</p>
-        <div class="buttons">
-          <button onclick="setLanguage('ar')">العربية</button>
-          <button onclick="setLanguage('fr')">Français</button>
-          <button onclick="setLanguage('en')">English</button>
-        </div>
-      </div>
-
-      <div id="chat" class="chat" style="display:none;"></div>
-
-      <div id="input-area" class="input-area" style="display:none;">
-        <input id="user-input" placeholder="" />
-        <button id="send-btn" onclick="sendMessage()">إرسال</button>
-      </div>
+    <div id="chat">
+        <div id="messages"></div>
+        <input type="text" id="userInput" placeholder="اكتب رسالتك...">
+        <button onclick="sendMessage()">إرسال</button>
     </div>
-    <footer class="footer">المكتبة الرئيسية للمطالعة العمومية</footer>
-  </div>
-  <script src="script.js"></script>
+
+    <script>
+        function sendMessage() {
+            let input = document.getElementById("userInput");
+            let message = input.value.trim();
+            if (message === "") return;
+
+            let messagesDiv = document.getElementById("messages");
+            messagesDiv.innerHTML += `<div class='message user'>${message}</div>`;
+
+            // رد البوت البسيط
+            let botReply = getBotReply(message);
+            messagesDiv.innerHTML += `<div class='message bot'>${botReply}</div>`;
+
+            input.value = "";
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function getBotReply(msg) {
+            msg = msg.toLowerCase();
+            if (msg.includes("سلام")) return "وعليكم السلام ورحمة الله وبركاته، كيف أساعدك؟";
+            if (msg.includes("اوقات العمل")) return "المكتبة تفتح من الأحد إلى الخميس من 8 صباحًا حتى 5 مساءً.";
+            if (msg.includes("شروط التسجيل")) return "إحضار بطاقة الهوية وصورتين شمسيتين وملء استمارة التسجيل.";
+            if (msg.includes("بطاقة") && msg.includes("الكترونية")) return "البطاقة الإلكترونية تصدر أيام الأحد والثلاثاء.";
+            if (msg.includes("فضاءات")) return "المكتبة تحتوي على قاعة مطالعة، قاعة إنترنت، قاعة أطفال، وقاعة محاضرات.";
+            if (msg.includes("استعارة كتاب")) return "لاستعارة كتاب، يجب تقديم البطاقة للمسؤول وتحديد مدة الإعارة.";
+            if (msg.includes("نظام داخلي")) return "سحب البطاقة = إنذار أول، السحب الثاني = إنذار ثاني، الثالث = إقصاء لمدة عام.";
+            return "عذرًا، لم أفهم سؤالك. حاول صياغته بطريقة أخرى.";
+        }
+    </script>
 </body>
 </html>
